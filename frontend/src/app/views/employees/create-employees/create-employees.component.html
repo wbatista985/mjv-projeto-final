@@ -1,0 +1,93 @@
+<div class="create-employees mat-elevation-z8">
+    <form [formGroup]="form" action="" (ngSubmit)="onSubmit();">
+        <h1>Cadastro</h1>
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">      
+            <mat-form-field [style.width]="'100%'"appearance="outline">
+                <mat-label>Nome</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="name">
+            </mat-form-field>
+            <mat-form-field [style.width]="'100%'"appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="email">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">      
+
+            <mat-form-field [style.width]="'100%'"appearance="outline">
+                <mat-label>Biografia</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="biography">
+            </mat-form-field>
+        
+        <mat-form-field [style.width]="'100%'"appearance="outline">
+            <mat-label>Ocupação</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="occupation">
+        </mat-form-field>
+        </div>
+        <ng-container formArrayName="phone">
+            <h1>Telefone</h1>
+            <div *ngFor="let _ of phone.controls; index as i">
+                <ng-container  [formGroupName]="i">
+                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
+                     
+                        <mat-form-field [style.width]="'100%'" appearance="outline">
+                            <mat-label>Numero</mat-label>
+                            <input matInput formControlName="number">
+                        </mat-form-field>
+    
+                        <mat-form-field [style.width]="'100%'"appearance="outline">
+                            <mat-label>Tipo</mat-label>
+                            <input matInput formControlName="type">
+                        </mat-form-field>
+                    </div>
+
+                </ng-container>
+            </div>
+        </ng-container>
+
+        <ng-container formArrayName="address">
+            <h1>Endereco</h1>
+            <div *ngFor="let _ of address.controls; index as i">
+                <ng-container [formGroupName]="i">
+                    <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="20px">
+                        <mat-form-field [style.width]="'100%'" appearance="outline">
+                            <mat-label>Rua</mat-label>
+                            <input matInput formControlName="street">
+                        </mat-form-field>
+                        <mat-form-field [style.width]="'100%'" appearance="outline">
+                            <mat-label>Cidade</mat-label>
+                            <input matInput formControlName="city" />
+                        </mat-form-field>
+                        <mat-form-field [style.width]="'100%'" appearance="outline">
+                            <mat-label>Numero</mat-label>
+                            <input matInput formControlName="number" />
+                        </mat-form-field>
+                    </div>
+            <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="20px">
+                    <mat-form-field [style.width]="'100%'"appearance="outline">
+                        <mat-label>Estado</mat-label>
+                        <input matInput formControlName="district" />
+                    </mat-form-field>
+                    <mat-form-field [style.width]="'100%'"appearance="outline">
+                        <mat-label>Pais</mat-label>
+                        <input matInput formControlName="country" />
+                    </mat-form-field>
+                    <mat-form-field [style.width]="'100%'"appearance="outline">
+                        <mat-label>CEP</mat-label>
+                        <input matInput formControlName="zipCode" />
+                    </mat-form-field>
+                </div>
+
+                </ng-container>
+            </div>
+        </ng-container>
+        <div fxLayout="row" fxLayoutAlign="end " >
+            <button  mat-raised-button  >
+                Salvar
+            </button>
+            
+            <button  mat-raised-button  >
+                Cancelar
+            </button>
+        </div>
+    </form>
+</div>

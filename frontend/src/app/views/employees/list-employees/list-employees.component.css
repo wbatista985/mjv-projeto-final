@@ -1,0 +1,33 @@
+table {
+    width: 100%;
+}
+
+.edit {
+    margin: 5px;
+    
+}
+
+.edit >  i {
+    color: #32373d;
+    font-size: 18px;
+}
+
+.delete > i {
+    color:#60489d;
+    font-size: 18px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+button {
+    margin-bottom: 30px; 
+    font-weight: 500;
+}  
+
+button:hover {  
+     color:#60489d ;
+    
+ }
+ 
