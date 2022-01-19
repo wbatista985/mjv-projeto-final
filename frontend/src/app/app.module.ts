@@ -22,6 +22,8 @@ import { registerLocaleData } from '@angular/common';
 import { ProductUpdateComponent } from './components/product/product-update/product-update.component';
 import { ProductDeleteComponent } from './components/product/product-delete/product-delete.component';
 import { SharedModule } from './shared/shared.module';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
+
 
 registerLocaleData(localePt);
 
@@ -45,6 +47,7 @@ registerLocaleData(localePt);
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatCarouselModule,
     SharedModule
   ],
   providers: [{

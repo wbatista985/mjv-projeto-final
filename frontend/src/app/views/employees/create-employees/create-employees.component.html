@@ -4,23 +4,23 @@
         <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">      
             <mat-form-field [style.width]="'100%'"appearance="outline">
                 <mat-label>Nome</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="name">
+                <input matInput placeholder="Nome" formControlName="name">
             </mat-form-field>
             <mat-form-field [style.width]="'100%'"appearance="outline">
                 <mat-label>Email</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="email">
+                <input matInput placeholder="Email" formControlName="email">
             </mat-form-field>
         </div>
         <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">      
 
             <mat-form-field [style.width]="'100%'"appearance="outline">
                 <mat-label>Biografia</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="biography">
+                <input matInput placeholder="Biografia" formControlName="biography">
             </mat-form-field>
         
         <mat-form-field [style.width]="'100%'"appearance="outline">
             <mat-label>Ocupação</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="occupation">
+            <input matInput placeholder="Ocupação" formControlName="occupation">
         </mat-form-field>
         </div>
         <ng-container formArrayName="phone">
@@ -30,13 +30,13 @@
                     <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
                      
                         <mat-form-field [style.width]="'100%'" appearance="outline">
-                            <mat-label>Numero</mat-label>
-                            <input matInput formControlName="number">
+                            <mat-label>Número</mat-label>
+                            <input matInput placeholder= 'Número'formControlName="number">
                         </mat-form-field>
     
                         <mat-form-field [style.width]="'100%'"appearance="outline">
                             <mat-label>Tipo</mat-label>
-                            <input matInput formControlName="type">
+                            <input matInput placeholder= 'Tipo'formControlName="type">
                         </mat-form-field>
                     </div>
 
@@ -51,29 +51,29 @@
                     <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="20px">
                         <mat-form-field [style.width]="'100%'" appearance="outline">
                             <mat-label>Rua</mat-label>
-                            <input matInput formControlName="street">
+                            <input matInput placeholder= 'Rua'formControlName="street">
                         </mat-form-field>
                         <mat-form-field [style.width]="'100%'" appearance="outline">
                             <mat-label>Cidade</mat-label>
-                            <input matInput formControlName="city" />
+                            <input matInput placeholder= 'Cidade'formControlName="city" />
                         </mat-form-field>
                         <mat-form-field [style.width]="'100%'" appearance="outline">
-                            <mat-label>Numero</mat-label>
-                            <input matInput formControlName="number" />
+                            <mat-label>Número</mat-label>
+                            <input matInput placeholder= 'Número'formControlName="number" />
                         </mat-form-field>
                     </div>
             <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="20px">
                     <mat-form-field [style.width]="'100%'"appearance="outline">
                         <mat-label>Estado</mat-label>
-                        <input matInput formControlName="district" />
+                        <input matInput placeholder= 'Estado'formControlName="district" />
                     </mat-form-field>
                     <mat-form-field [style.width]="'100%'"appearance="outline">
                         <mat-label>Pais</mat-label>
-                        <input matInput formControlName="country" />
+                        <input matInput placeholder= 'País'formControlName="country" />
                     </mat-form-field>
                     <mat-form-field [style.width]="'100%'"appearance="outline">
                         <mat-label>CEP</mat-label>
-                        <input matInput formControlName="zipCode" />
+                        <input matInput placeholder= 'Cep'formControlName="zipCode" />
                     </mat-form-field>
                 </div>
 
