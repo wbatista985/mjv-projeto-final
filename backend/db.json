@@ -344,6 +344,29 @@
         }
       ],
       "id": 15
+    },
+    {
+      "name": "wagner",
+      "email": "wbatista985@gmail.com",
+      "biography": "dev",
+      "occupation": "dev junior",
+      "phone": [
+        {
+          "number": "11942601853",
+          "type": "celular"
+        }
+      ],
+      "address": [
+        {
+          "street": "estrada",
+          "district": "sao paulo",
+          "country": "brasil",
+          "city": "estrada",
+          "number": "6",
+          "zipCode": "09330550"
+        }
+      ],
+      "id": 16
     }
   ]
 }

@@ -9,7 +9,9 @@
     align-items: center;
     text-decoration: none;
     color: #000;
+    font-weight: 300;
 }
+
 
 .header .logo {
     max-height: 50px;
@@ -17,6 +19,7 @@
 
 .header .title-group {
     padding-left : 50px;
+    margin-left: 50px;
 }
 
 .header .title-group i {
