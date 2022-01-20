@@ -1,3 +1,30 @@
+# spring-boot-medium
+
+Repository for the article example: [Blindando sua API Spring Boot com o padrão DTO](https://medium.com/p/44f97020d1a
+
+## Requirements
+
+For building and running the application you need:
+
+- [Maven](http://maven.apache.org/download.cgi)
+- [PostgresSQL](http://maven.apache.org/download.cgi)
+
+## Running
+
+First, clone the project and build locally:
+
+```shell
+https://github.com/wbatista985/mjv-projeto-final.git
+```
+
+Make sure you have a MySQL database called "dto".
+
+From project root directory run:
+
+```shell
+mvn spring-boot:run
+```
+
 # Frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.5.
