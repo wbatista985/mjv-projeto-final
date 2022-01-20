@@ -1,11 +1,15 @@
-# spring-boot-medium
-
-Repository for the article example: [Blindando sua API Spring Boot com o padrão DTO](https://medium.com/p/44f97020d1a
+   # Final challenge using java language<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a>
+<div style="display: inline_block">
+Performing Employee registration project and connecting Backend with Frontend  <img  align="center" alt="html5" src="https://img.shields.io/static/v1?label=DevSchool&message=MJV&color=blueviolet"/>  <a href="https://www.java.com" target="_blank"> 
+  
+  #### Authors
+- [Wagner dos Santos ](https://github.com/wbatista985)
 
 ## Requirements
 
 For building and running the application you need:
 
+- [Spring Boot](http://maven.apache.org/download.cgi)
 - [Maven](http://maven.apache.org/download.cgi)
 - [PostgresSQL](http://maven.apache.org/download.cgi)
 
@@ -17,14 +21,23 @@ First, clone the project and build locally:
 https://github.com/wbatista985/mjv-projeto-final.git
 ```
 
-Make sure you have a MySQL database called "dto".
+Make sure you have a PostgresSQL database called "postgres".
 
 From project root directory run:
 
 ```shell
-mvn spring-boot:run
+spring-boot:run
+```
+We have an API written in Java, using the Spring framework which is used to register employees.
+For our application to work, it is necessary for employees to register in the system. Each employee is represented by the following class:
+
+```
+  
+  
 ```
 
+- `@Entity`: Our User class is an entity that will be mapped to our database.
+- `@Id/@GeneratedValue`: The annotated attribute will be the primary key of the table and will be generated automatically using the IDENTITY strategy.
 # Frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.5.
