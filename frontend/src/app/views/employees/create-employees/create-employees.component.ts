@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IEmployee } from 'src/app/interfaces/employee.interface';
 import { Address } from 'src/app/models/address.model';
 import { Employee } from 'src/app/models/employee.model';
@@ -17,6 +18,7 @@ export class CreateEmployeesComponent implements OnInit {
   public address!: FormArray;
 
   constructor(
+    private router : Router,
     private employeesService: EmployeesService
   ) { }
 
@@ -54,6 +56,43 @@ export class CreateEmployeesComponent implements OnInit {
     const data = this.getValueForm();
 
     if (data) {
+     /* {
+        "id": 1,
+        "nome": "string",
+        "cpfCnpj": "40805240860",
+        "sexo": "M",
+        "endereco": {
+            "rua": "string",
+            "numero": "90",
+            "cidade": "string",
+            "estado": "sp",
+            "pais": "string",
+            "cep": "string"
+        },
+        "profissao": {
+            "id": 1,
+            "nome": null,
+            "salarioMedio": null
+        }
+    }
+    {
+      id: 1,
+      nome: 'string',
+      cpfCnpj: '40805240860',
+      sexo: 'M',
+      endereco: {
+        rua: 'string',
+        numero: '90',
+        cidade: 'string',
+        estado: 'sp',
+        pais: 'string',
+        cep: 'string'
+      },
+      profissao: { id: 1, nome: null, salarioMedio: null }
+    }
+    */
+
+
       employye = new Employee({
         name: data.name,
         email: data.email,
@@ -66,6 +105,7 @@ export class CreateEmployeesComponent implements OnInit {
       this.employeesService.createEmployee(employye)
         .subscribe(result => {
           console.log(result);
+          this.router.navigateByUrl('employees/list-employees');
         })
     }
   }

@@ -35,5 +35,13 @@ export class ListEmployeesComponent implements OnInit {
     this.router.navigate(['employees/create-employees'])
   }
 
+  public edit(employee: IEmployee) {
+
+    this.employeesService.updateData(employee);
+    this.router.navigateByUrl('employees/edit-employees')
+
+
+  }
+
 
 }

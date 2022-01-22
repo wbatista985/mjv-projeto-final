@@ -5,6 +5,7 @@ import { ListEmployeesComponent } from './list-employees/list-employees.componen
 import { CreateEmployeesComponent } from './create-employees/create-employees.component';
 import { EmployeesRoutingModule } from './employees-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { EditEmployeesComponent } from './edit-employees/edit-employees.component';
 
 
 
@@ -12,7 +13,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
   declarations: [
     EmployeesComponent,
     ListEmployeesComponent,
-    CreateEmployeesComponent
+    CreateEmployeesComponent,
+    EditEmployeesComponent
   ],
   imports: [
     CommonModule,
