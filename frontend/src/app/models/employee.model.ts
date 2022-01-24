@@ -11,7 +11,7 @@ export class Employee implements IEmployee {
     public document?: string;
     public gener?: string;
     public email: string;
-    public biography: string;
+    public salary: string;
     public occupation: string;
     public phone: IPhone[];
     public address: IAddress[];
@@ -23,7 +23,7 @@ export class Employee implements IEmployee {
             this.document = '';
             this.gener = '';
             this.email = '';
-            this.biography = '';
+            this.salary = '';
             this.occupation = '';
             this.phone = [];
             this.address = [];
@@ -33,7 +33,7 @@ export class Employee implements IEmployee {
             this.document = employee.document;
             this.gener = employee.gener;
             this.email = employee.email;
-            this.biography = employee.biography;
+            this.salary = employee.salary;
             this.occupation = employee.occupation;
             this.phone = employee.phone.map(phone => new Phone(phone));
             this.address = employee.address.map(address => new Address(address));

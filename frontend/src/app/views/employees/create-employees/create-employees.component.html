@@ -14,15 +14,20 @@
         <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">      
 
             <mat-form-field [style.width]="'100%'"appearance="outline">
-                <mat-label>Biografia</mat-label>
-                <input matInput placeholder="Biografia" formControlName="biography">
+                <mat-label>CPF</mat-label>
+                <input matInput placeholder="CPF" formControlName="document">
             </mat-form-field>
         
         <mat-form-field [style.width]="'100%'"appearance="outline">
-            <mat-label>Ocupação</mat-label>
+            <mat-label>Profissão</mat-label>
             <input matInput placeholder="Ocupação" formControlName="occupation">
         </mat-form-field>
+        <mat-form-field [style.width]="'100%'"appearance="outline">
+            <mat-label>Salário</mat-label>
+            <input matInput placeholder="Salário" formControlName="salary">
+        </mat-form-field>
         </div>
+
         <ng-container formArrayName="phone">
             <h1>Telefone</h1>
             <div *ngFor="let _ of phone.controls; index as i">
@@ -32,11 +37,6 @@
                         <mat-form-field [style.width]="'100%'" appearance="outline">
                             <mat-label>Número</mat-label>
                             <input matInput placeholder= 'Número'formControlName="number">
-                        </mat-form-field>
-    
-                        <mat-form-field [style.width]="'100%'"appearance="outline">
-                            <mat-label>Tipo</mat-label>
-                            <input matInput placeholder= 'Tipo'formControlName="type">
                         </mat-form-field>
                     </div>
 

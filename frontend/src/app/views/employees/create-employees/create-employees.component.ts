@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IEmployee } from 'src/app/interfaces/employee.interface';
-import { Address } from 'src/app/models/address.model';
-import { Employee } from 'src/app/models/employee.model';
-import { Phone } from 'src/app/models/phone.model';
 import { EmployeesService } from 'src/app/services/employees.service';
 
 @Component({
@@ -18,7 +15,7 @@ export class CreateEmployeesComponent implements OnInit {
   public address!: FormArray;
 
   constructor(
-    private router : Router,
+    private router: Router,
     private employeesService: EmployeesService
   ) { }
 
@@ -30,8 +27,9 @@ export class CreateEmployeesComponent implements OnInit {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
-      biography: new FormControl('', Validators.required),
       occupation: new FormControl('', Validators.required),
+      document: new FormControl('', Validators.required),
+      salary: new FormControl('', Validators.required),
       phone: new FormArray([new FormGroup({
         number: new FormControl('', Validators.required),
         type: new FormControl('', Validators.required)
@@ -51,63 +49,45 @@ export class CreateEmployeesComponent implements OnInit {
   }
 
   public onSubmit() {
-    let employye: IEmployee | null;
-
     const data = this.getValueForm();
 
     if (data) {
-     /* {
-        "id": 1,
-        "nome": "string",
-        "cpfCnpj": "40805240860",
-        "sexo": "M",
-        "endereco": {
-            "rua": "string",
-            "numero": "90",
-            "cidade": "string",
-            "estado": "sp",
-            "pais": "string",
-            "cep": "string"
-        },
-        "profissao": {
-            "id": 1,
-            "nome": null,
-            "salarioMedio": null
-        }
+      this.createOccupation(data);
     }
-    {
-      id: 1,
-      nome: 'string',
-      cpfCnpj: '40805240860',
-      sexo: 'M',
+  }
+
+  private createOccupation(data: IEmployee) {
+    const payload = {
+      nome: data.occupation,
+      salarioMedio: parseInt(data.salary)
+    }
+    this.employeesService.createOccupation(payload)
+    .subscribe(result => {
+      this.createEmployee(data, result)
+    })
+  }
+
+  private createEmployee(data: IEmployee, occupation: any) {
+    const payload = {
+      nome: data.name,
+      cpfCnpj: data.document,
+      sexo: null,
       endereco: {
-        rua: 'string',
-        numero: '90',
-        cidade: 'string',
-        estado: 'sp',
-        pais: 'string',
-        cep: 'string'
+        rua: data.address[0].street,
+        numero: data.address[0].number,
+        cidade: data.address[0].city,
+        estado: data.address[0].district,
+        pais: data.address[0].country,
+        cep: data.address[0].zipCode
       },
-      profissao: { id: 1, nome: null, salarioMedio: null }
-    }
-    */
+      profissao: occupation
+    };
 
-
-      employye = new Employee({
-        name: data.name,
-        email: data.email,
-        occupation: data.occupation,
-        biography: data.biography,
-        phone: data.phone.map(phone => new Phone(phone)),
-        address: data?.address.map(address => new Address(address)),
+    this.employeesService.createEmployee(payload)
+      .subscribe(result => {
+        console.log(result);
+        this.router.navigateByUrl('employees/list-employees');
       });
-      
-      this.employeesService.createEmployee(employye)
-        .subscribe(result => {
-          console.log(result);
-          this.router.navigateByUrl('employees/list-employees');
-        })
-    }
   }
 
   public getValueForm(): IEmployee {

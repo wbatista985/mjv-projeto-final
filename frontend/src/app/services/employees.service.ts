@@ -44,7 +44,7 @@ export class EmployeesService {
           document: funcionario.cpfCnpj,
           gener: funcionario.sexo,
           address: address,
-          biography: '',
+          salary:funcionario.salario,
           email: funcionario.email,
           occupation: funcionario.profissao.nome,
           phone: []
@@ -52,14 +52,24 @@ export class EmployeesService {
       })));
   }
 
+  public createOccupation(body: any) {
+    return this.http.post<any>('http://localhost:8080/profissao/inserir', body)
+    .pipe(takeUntil(this.destroy))
+    .pipe(catchError((err) => {
+      console.log('err', err);
+      return[]
+    }))
+  }
+
   public createEmployee(body: any) {
-    return this.http.post<any>('http://localhost:3001/employees', body)
+    return this.http.post<any>('http://localhost:8080/funcionarios/inserir', body)
       .pipe(takeUntil(this.destroy))
       .pipe(catchError((err) => {
         console.log('err', err);
         return [];
       }))
   }
+
 
   public updateData(value: IEmployee) {
     this.employeeSubject.next(value)

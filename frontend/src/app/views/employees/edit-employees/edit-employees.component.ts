@@ -35,7 +35,6 @@ export class EditEmployeesComponent implements OnInit {
     this.form = new FormGroup({
       name: new FormControl(this.employee && this.employee.name ? this.employee.name : '', Validators.required),
       email: new FormControl(this.employee && this.employee.email ? this.employee.email : '', Validators.required),
-      biography: new FormControl(this.employee && this.employee.biography ? this.employee.biography : '', Validators.required),
       occupation: new FormControl(this.employee && this.employee.occupation ? this.employee.occupation : '', Validators.required),
       phone: new FormArray(this.setFormArrayPhone(this.employee?.phone)),
       address: new FormArray(this.setFormArrayAdress(this.employee?.address))
@@ -66,7 +65,8 @@ export class EditEmployeesComponent implements OnInit {
         name: data.name,
         email: data.email,
         occupation: data.occupation,
-        biography: data.biography,
+        salary: data.salary,
+        document: data.document,
         phone: data.phone.map(phone => new Phone(phone)),
         address: data?.address.map(address => new Address(address)),
       });
