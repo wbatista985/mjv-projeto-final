@@ -2,6 +2,7 @@ package mjv.spring.jpa.rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import mjv.spring.jpa.rest.service.ProfissaoService;
 
 @RestController
 @RequestMapping("/profissao")
+@CrossOrigin
 public class ProfissaoController {
 	@Autowired
 	private ProfissaoService profissaoService;
