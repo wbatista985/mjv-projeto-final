@@ -12,10 +12,6 @@ import mjv.spring.jpa.rest.model.Profissao;
 import mjv.spring.jpa.rest.model.Sexo;
 
 public class FuncionarioDTO implements Serializable {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
@@ -50,6 +46,7 @@ public class FuncionarioDTO implements Serializable {
 	public FuncionarioDTO(Funcionario funcionario) {
 		id = funcionario.getId();
 		nome = funcionario.getNome();
+		email = funcionario.getEmail();
 		cpfCnpj = funcionario.getCpfCnpj();
 		sexo = funcionario.getSexo();
 		endereco = new EnderecoDTO(funcionario.getEndereco());

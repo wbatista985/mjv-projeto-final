@@ -2,10 +2,7 @@ package mjv.spring.jpa.rest.controller;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -51,8 +48,8 @@ public class FuncionarioController {
 	}
 
 	@DeleteMapping(path= "/deletar/{id}")
-	public ResponseEntity<String> deletar(@PathVariable Integer id) {
+	public ResponseEntity<Void> deletar(@PathVariable Integer id) {
 		funcionarioService.deletarFuncionario(id);
-		return ResponseEntity.ok().body("Funcionario deletado com sucesso!");
+		return ResponseEntity.noContent().build();
 	}
 }

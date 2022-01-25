@@ -15,7 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -53,15 +52,23 @@ public class Funcionario {
 
 	}
 
-	public Funcionario(Integer id, String nome, String cpfCnpj, Sexo sexo, Endereco endereco, Profissao profissao) {
+	public Funcionario(
+			Integer id, 
+			String nome, 
+			String email, 
+			String cpfCnpj, 
+			Sexo sexo, Endereco endereco,
+			Profissao profissao) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.email = email;
 		this.cpfCnpj = cpfCnpj;
 		this.sexo = sexo;
 		this.endereco = endereco;
 		this.profissao = profissao;
 	}
+
 
 	public Profissao getProfissao() {
 		return profissao;

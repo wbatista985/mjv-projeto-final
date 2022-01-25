@@ -28,14 +28,35 @@ export class EditEmployeesComponent implements OnInit {
 
   public ngOnInit(): void {
     this.employee = this.employeesService.getData();
+
+    if (!this.employee) {
+      this.cancel();
+    }
     this.buildForm();
   }
 
   public buildForm(): void {
     this.form = new FormGroup({
-      name: new FormControl(this.employee && this.employee.name ? this.employee.name : '', Validators.required),
-      email: new FormControl(this.employee && this.employee.email ? this.employee.email : '', Validators.required),
-      occupation: new FormControl(this.employee && this.employee.occupation ? this.employee.occupation : '', Validators.required),
+      name: new FormControl(
+        this.employee && this.employee.name
+          ? this.employee.name
+          : '', Validators.required),
+      email: new FormControl(
+        this.employee && this.employee.email
+          ? this.employee.email
+          : '', Validators.required),
+      occupation: new FormControl(
+        this.employee && this.employee.occupation
+          ? this.employee.occupation.occupation
+          : '', Validators.required),
+      document: new FormControl(
+        this.employee && this.employee.document
+          ? this.employee.document
+          : '', Validators.required),
+      salary: new FormControl(
+        this.employee && this.employee.occupation.salary
+          ? this.employee.occupation.salary
+          : ''),
       phone: new FormArray(this.setFormArrayPhone(this.employee?.phone)),
       address: new FormArray(this.setFormArrayAdress(this.employee?.address))
     });
@@ -49,33 +70,61 @@ export class EditEmployeesComponent implements OnInit {
       phone.map(phone => {
         return new FormGroup({
           number: new FormControl(phone.number, Validators.required),
-          type: new FormControl(phone.type, Validators.required)
         });
       }) : [];
   }
 
   public onSubmit() {
-    let employye: IEmployee | null;
-
     const data = this.getValueForm();
 
     if (data) {
-      
-      employye = new Employee({
-        name: data.name,
-        email: data.email,
-        occupation: data.occupation,
-        salary: data.salary,
-        document: data.document,
-        phone: data.phone.map(phone => new Phone(phone)),
-        address: data?.address.map(address => new Address(address)),
-      });
-
-      this.employeesService.createEmployee(employye)
-        .subscribe(result => {
-       this.router.navigateByUrl('employees/list-employees');
-        })
+      this.updateOccupation(data);
     }
+  }
+
+  private updateOccupation(data: IEmployee) {
+    const payload = {
+      id: this.employee?.occupation.id,
+      nome: data.occupation,
+      salarioMedio: parseInt(data.salary)
+    }
+    this.employeesService.updateOccupation(payload)
+      .subscribe(result => {
+        if (result) {
+          this.updateEmployee(data, result);
+        }
+      })
+  }
+
+  public updateEmployee(data: IEmployee, result: any) {
+
+    const payload = {
+      id: this.employee?.id,
+      nome: data.name,
+      cpfCnpj: data.document,
+      email: data.email,
+      sexo: data.gener,
+      salarioMedio: data.salary,
+      endereco: {
+        rua: data.address[0].street,
+        numero: data.address[0].number,
+        cidade: data.address[0].city,
+        estado: data.address[0].district,
+        pais: data.address[0].country,
+        cep: data.address[0].zipCode
+      },
+      profissao: {
+        id: result.id,
+        nome: result.nome,
+        salarioMedio: result.salarioMedio
+      },
+      telefone1: data.phone[0].number
+    };
+
+    this.employeesService.updateEmployee(payload)
+      .subscribe(() => {
+        this.router.navigateByUrl('employees/list-employees');
+      })
   }
 
   setFormArrayAdress(address: Array<IAddress> | undefined): AbstractControl[] {
@@ -93,8 +142,10 @@ export class EditEmployeesComponent implements OnInit {
     } else {
       return []
     }
+  }
 
-
+  public cancel() {
+    this.router.navigateByUrl('employees/list-employees');
   }
 
   public getValueForm(): IEmployee {

@@ -6,6 +6,7 @@ import { IAddress } from '../interfaces/address.interface';
 import { IEmployee } from '../interfaces/employee.interface';
 import { Address } from '../models/address.model';
 import { Employee } from '../models/employee.model';
+import { Occupation } from '../models/occupation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ import { Employee } from '../models/employee.model';
 export class EmployeesService {
   private destroy = new Subject();
   private employeeSubject = new BehaviorSubject<IEmployee | null>(null);
+
   constructor(
     private http: HttpClient
   ) { }
@@ -38,31 +40,50 @@ export class EmployeesService {
 
         address.push(newAdress);
 
+        const phones = funcionario.telefones.map((telefone: string) => ({
+          number: telefone
+        }));
+
+        const occupation = new Occupation({
+          id: funcionario.profissao.id,
+          occupation: funcionario.profissao.nome,
+          salary: funcionario.profissao.salarioMedio
+        });
+
         return new Employee({
           id: funcionario.id,
           name: funcionario.nome,
           document: funcionario.cpfCnpj,
           gener: funcionario.sexo,
           address: address,
-          salary:funcionario.salario,
+          salary: funcionario.salarioMedio,
           email: funcionario.email,
-          occupation: funcionario.profissao.nome,
-          phone: []
+          occupation: occupation,
+          phone: phones
         })
       })));
   }
 
-  public createOccupation(body: any) {
-    return this.http.post<any>('http://localhost:8080/profissao/inserir', body)
-    .pipe(takeUntil(this.destroy))
-    .pipe(catchError((err) => {
-      console.log('err', err);
-      return[]
-    }))
+  public createOccupation(payload: any) {
+    return this.http.post<any>('http://localhost:8080/profissao/inserir', payload)
+      .pipe(takeUntil(this.destroy))
+      .pipe(catchError((err) => {
+        console.log('err', err);
+        return []
+      }))
   }
 
-  public createEmployee(body: any) {
-    return this.http.post<any>('http://localhost:8080/funcionarios/inserir', body)
+  public updateOccupation(payload: any) {
+    return this.http.put<any>('http://localhost:8080/profissao/atualizar', payload)
+      .pipe(takeUntil(this.destroy))
+      .pipe(catchError((err) => {
+        console.log('err', err);
+        return []
+      }))
+  }
+
+  public createEmployee(payload: any) {
+    return this.http.post<any>('http://localhost:8080/funcionarios/inserir', payload)
       .pipe(takeUntil(this.destroy))
       .pipe(catchError((err) => {
         console.log('err', err);
@@ -70,12 +91,27 @@ export class EmployeesService {
       }))
   }
 
+  public updateEmployee(payload: any) {
+    return this.http.put<any>('http://localhost:8080/funcionarios/atualizar', payload)
+      .pipe(takeUntil(this.destroy))
+      .pipe(catchError((err) => {
+        console.log('err', err);
+        return []
+      }))
+  }
+
+  public deleteEmployee(id: number) {
+    return this.http.delete<any>(`http://localhost:8080/funcionarios/deletar/${id}`)
+      .pipe(takeUntil(this.destroy))
+      .pipe(catchError((err) => {
+        console.log('err', err);
+        return [];
+      }))
+  }
 
   public updateData(value: IEmployee) {
     this.employeeSubject.next(value)
-
   }
-
 
   public getData() {
     return this.employeeSubject.value;

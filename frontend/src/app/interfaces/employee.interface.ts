@@ -1,4 +1,5 @@
 import { IAddress } from "./address.interface";
+import { IOccupation } from "./occupation.interface";
 import { IPhone } from "./phone.interface";
 
 export interface IEmployee {
@@ -8,7 +9,7 @@ export interface IEmployee {
     salary: string;
     gener?: string;
     email: string;
-    occupation: string;
+    occupation: IOccupation;
     phone: IPhone[];
     address: IAddress[];
 }

@@ -1,7 +1,9 @@
 import { IAddress } from "../interfaces/address.interface";
 import { IEmployee } from "../interfaces/employee.interface";
+import { IOccupation } from "../interfaces/occupation.interface";
 import { IPhone } from "../interfaces/phone.interface";
 import { Address } from "./address.model";
+import { Occupation } from "./occupation.model";
 import { Phone } from "./phone.model";
 
 export class Employee implements IEmployee {
@@ -12,7 +14,7 @@ export class Employee implements IEmployee {
     public gener?: string;
     public email: string;
     public salary: string;
-    public occupation: string;
+    public occupation: IOccupation;
     public phone: IPhone[];
     public address: IAddress[];
 
@@ -24,7 +26,7 @@ export class Employee implements IEmployee {
             this.gener = '';
             this.email = '';
             this.salary = '';
-            this.occupation = '';
+            this.occupation = new Occupation();
             this.phone = [];
             this.address = [];
         } else {
@@ -34,7 +36,7 @@ export class Employee implements IEmployee {
             this.gener = employee.gener;
             this.email = employee.email;
             this.salary = employee.salary;
-            this.occupation = employee.occupation;
+            this.occupation = new Occupation(employee.occupation);
             this.phone = employee.phone.map(phone => new Phone(phone));
             this.address = employee.address.map(address => new Address(address));
         }

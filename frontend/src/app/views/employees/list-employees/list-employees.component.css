@@ -16,9 +16,6 @@ table {
 .delete > i {
     color:#60489d;
     font-size: 18px;
-}
-
-.cursor-pointer {
     cursor: pointer;
 }
 

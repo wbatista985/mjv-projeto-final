@@ -10,7 +10,7 @@ import { EmployeesService } from 'src/app/services/employees.service';
 })
 export class ListEmployeesComponent implements OnInit {
   public employees!: IEmployee[];
-  public displayedColumns = ['name', 'email', 'occupation', 'action']
+  public displayedColumns = ['name', 'email', 'occupation', 'salary','action']
 
   constructor(
     private router: Router,
@@ -24,24 +24,25 @@ export class ListEmployeesComponent implements OnInit {
     this.employeesService.findEmployees()
       .subscribe(result => {
         this.employees = result;
-        console.log(this.employees);
       });
   }
 
   public redirectTo() {
     return this.router.navigateByUrl('employees/create-employees');
   }
-  navigateToProductCreate(): void {
-    this.router.navigate(['employees/create-employees'])
-  }
 
   public edit(employee: IEmployee) {
-
+    console.log(employee);
+    
     this.employeesService.updateData(employee);
     this.router.navigateByUrl('employees/edit-employees')
-
-
   }
 
+  public delete(id: number) {
+    this.employeesService.deleteEmployee(id)
+    .subscribe(result  => {
+      this.loadEmployees();
+    });
+  }
 
 }

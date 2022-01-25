@@ -1,4 +1,4 @@
-<button  mat-raised-button (click)="navigateToProductCreate()">
+<button  mat-raised-button (click)="redirectTo()">
     Novo Cadastro
 </button>
 
@@ -18,8 +18,13 @@
 
         <!-- ocupation Column -->
         <ng-container matColumnDef="occupation">
-            <th mat-header-cell *matHeaderCellDef>Ocupação</th>
-            <td class="cursor-pointer" mat-cell (click)="redirectTo();" *matCellDef="let row">{{row.occupation}}</td>
+            <th mat-header-cell *matHeaderCellDef>Profissâo</th>
+            <td class="cursor-pointer" mat-cell (click)="redirectTo();" *matCellDef="let row">{{row.occupation.occupation}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="salary">
+            <th mat-header-cell *matHeaderCellDef>Salário</th>
+            <td class="cursor-pointer" mat-cell (click)="redirectTo();" *matCellDef="let row">{{row.occupation.salary}}</td>
         </ng-container>
 
         <!-- Action Column -->
@@ -31,7 +36,7 @@
                         edit
                     </i>
                 </a>
-                <a routerLink="/employees/delete/{{ row.id }}" class="delete">
+                <a (click)="delete(row.id)" class="delete">
                     <i class="material-icons ">
                         delete
                     </i>

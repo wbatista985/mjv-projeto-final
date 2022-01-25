@@ -63,15 +63,19 @@ export class CreateEmployeesComponent implements OnInit {
     }
     this.employeesService.createOccupation(payload)
     .subscribe(result => {
-      this.createEmployee(data, result)
+      if(result) {
+        this.createEmployee(data, result);
+      }
     })
   }
 
-  private createEmployee(data: IEmployee, occupation: any) {
+  private createEmployee(data: IEmployee, result: any) {
+
     const payload = {
       nome: data.name,
       cpfCnpj: data.document,
-      sexo: null,
+      email: data.email,
+      salarioMedio: data.salary,
       endereco: {
         rua: data.address[0].street,
         numero: data.address[0].number,
@@ -80,7 +84,8 @@ export class CreateEmployeesComponent implements OnInit {
         pais: data.address[0].country,
         cep: data.address[0].zipCode
       },
-      profissao: occupation
+      profissao: result,
+      telefone1: data.phone[0].number
     };
 
     this.employeesService.createEmployee(payload)
@@ -92,6 +97,10 @@ export class CreateEmployeesComponent implements OnInit {
 
   public getValueForm(): IEmployee {
     return this.form.value;
+  }
+
+  public cancel() {
+    this.router.navigateByUrl('employees/list-employees');
   }
 
 }
