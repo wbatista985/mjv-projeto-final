@@ -5,6 +5,11 @@ Performing Employee registration project and connecting Backend with Frontend  <
   #### Authors
 - [Wagner dos Santos ](https://github.com/wbatista985)
 
+#### Course offered by MJV technology and inovation
+- [ MJV ](https://www.mjvinnovation.com/pt-br/)
+
+#### Instructor
+- [ Glayson sampaio ](https://github.com/glysns)
 
    
 ## Requirements
@@ -232,7 +237,15 @@ public class FuncionarioService {
 ```
 - `@Service`: We use this annotation for the framework to see our class and indicate that this class is a service.
 
-   
+### Data Transfer Object – DTO
+	
+The name itself says a lot: a simple object used to transfer data from one place to another in the application, without business logic in its objects and commonly associated with the transfer of data between a view layer and another of the persistence of the data (model layer). Very often you will see this pattern being used in conjunction with a DAO.
+
+This pattern is also widely used when you don't want to expose the persistence layer, but you need to display the same data in the presentation layer. For example, consider an application screen that needs to list the data of 10 people registered in a table. To access this data, the persistence layer does so with the listing configured in an ArrayList of 10 PO's (see pattern above). To pass these values to the screen, the same list must first be converted to a list of DTO's with the same attributes and get's/set's methods. All this because the same application makes use of JPA, for example, or Hibernate and the same frameworks do not allow data considered “lazy” to persist until after the connection has been closed. For this reason, the conversion is necessary so that the data can travel without being lost or without any connection error happening.
+
+- [Link example dto project ](https://www.devmedia.com.br/diferenca-entre-os-patterns-po-pojo-bo-dto-e-vo/28162#:~:text=Data%20Transfer%20Object%20%E2%80%93%20DTO&text=Esse%20padr%C3%A3o%20tamb%C3%A9m%20%C3%A9%20bastante,pessoas%20cadastradas%20em%20uma%20tabela.)
+
+Note: design patterns should also not be used to the detriment of the environment where you are running the same project, the idea is that they are abstract enough to adapt, but you will be the main author of this, so don't disregard the environment in the time to think of all the adaptable scenarios.
    
 # Frontend
 
