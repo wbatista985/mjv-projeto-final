@@ -79,7 +79,7 @@ public class Funcionario {
   
 ```
 
-- `@Entity`: Our cadastro class is an entity that will be mapped to our database.
+- `@Entity`: Our Funcionario class is an entity that will be mapped to our database.
   Usamos @ElementCollectionanotação para declarar um mapeamento de coleção de elementos. Todos os registros da coleção são armazenados em uma tabela separada. A configuração para esta tabela é especificada usando a @CollectionTableanotação.
 
 A @CollectionTableanotação é usada para especificar o nome da tabela que armazena todos os registros da coleção 
