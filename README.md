@@ -22,9 +22,9 @@ For building and running the application you need:
 - [JPA](http://maven.apache.org/download.cgi)
 - [Spring Framework](http://maven.apache.org/download.cgi)
 
-# Backend
+# `Backend`
    
-## Running
+## `Running`
 
 First, clone the project and build locally:
 
