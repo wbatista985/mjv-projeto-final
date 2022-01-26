@@ -248,6 +248,9 @@ This pattern is also widely used when you don't want to expose the persistence l
 Note: design patterns should also not be used to the detriment of the environment where you are running the same project, the idea is that they are abstract enough to adapt, but you will be the main author of this, so don't disregard the environment in the time to think of all the adaptable scenarios.
    
 # Frontend
+	
+<img  align="center" alt="" src="https://i.imgur.com/MtH61PG.png"/>
+</div><br/>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.5.
 
