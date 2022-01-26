@@ -37,7 +37,7 @@ Make sure you have a PostgresSQL database called "postgres".
 From project root directory run:
 
 ```shell
-spring-boot:`run`
+spring-boot: run
 ```
 ### Class model Funcionário
 We have an API written in Java, using the Spring framework which is used to register employees.
