@@ -32,8 +32,7 @@ public class FuncionarioService {
 		Optional<Funcionario> funcionarioExistente = funcionarioRepository.findById(funcionario.getId());
 
 		return funcionarioExistente.orElseThrow(() -> new ObjectNotFoundException(
-		"Funcionario não encontrado! Id: " + funcionario.getId() + 
-		", Tipo: " + Funcionario.class.getName()));
+				"Funcionario não encontrado! Id: " + funcionario.getId() + ", Tipo: " + Funcionario.class.getName()));
 	}
 
 	public Funcionario inserirFuncionario(Funcionario funcionario) {

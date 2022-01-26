@@ -82,8 +82,8 @@ export class EmployeesService {
       }))
   }
 
-  public createEmployee(payload: any) {
-    return this.http.post<any>('http://localhost:8080/funcionarios/inserir', payload)
+  public createEmployee(payload: any): Observable<IEmployee> {
+    return this.http.post<IEmployee>('http://localhost:8080/funcionarios/inserir', payload)
       .pipe(takeUntil(this.destroy))
       .pipe(catchError((err) => {
         console.log('err', err);
@@ -109,6 +109,27 @@ export class EmployeesService {
       }))
   }
 
+  public addAvatar(id: string, file: File): Observable<number> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http
+      .post<any>(`http://localhost:8080/imagem/upload/${id}`, formData)
+      .pipe(catchError((err) => {
+        console.log('err', err);
+        return [];
+      }))
+  }
+
+  public donwloadAvatar(id: string) {
+    return this.http.get(`http://localhost:8080/imagem/download/${id}`, {
+      responseType: 'blob'
+    })
+    .pipe(result => result)
+    .pipe(catchError((err) => {
+      console.log('err', err);
+      return [];
+    }))
+  }
   public updateData(value: IEmployee) {
     this.employeeSubject.next(value)
   }

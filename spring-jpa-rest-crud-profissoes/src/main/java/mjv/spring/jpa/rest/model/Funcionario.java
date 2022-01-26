@@ -15,7 +15,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tab_funcionario")
@@ -43,6 +46,11 @@ public class Funcionario {
 	@ManyToOne()
 	@JoinColumn(name = "prof_id")
 	private Profissao profissao;
+	
+	@JsonIgnore
+	@OneToOne()
+	@JoinColumn(name = "imagem_id")
+	private Imagem imagem;
 	
 	@ElementCollection
 	@CollectionTable(name = "telefones")
@@ -134,4 +142,12 @@ public class Funcionario {
 		this.telefones = telefones;
 	}
 
+	public Imagem getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(Imagem imagem) {
+		this.imagem = imagem;
+	}
+	
 }

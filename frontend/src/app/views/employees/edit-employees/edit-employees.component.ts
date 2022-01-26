@@ -3,8 +3,12 @@ import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '
 import { IEmployee } from 'src/app/interfaces/employee.interface';
 import { IPhone } from 'src/app/interfaces/phone.interface';
 import { IAddress } from 'src/app/interfaces/address.interface';
+import { Employee } from 'src/app/models/employee.model';
+import { Phone } from 'src/app/models/phone.model';
 import { EmployeesService } from 'src/app/services/employees.service';
+import { Address } from 'src/app/models/address.model';
 import { Router } from '@angular/router';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-edit-employees',
@@ -12,13 +16,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./edit-employees.component.css']
 })
 export class EditEmployeesComponent implements OnInit {
-
   public employee: IEmployee | null = null;
   public form!: FormGroup;
   public phone!: FormArray;
   public address!: FormArray;
-
+  public avatarView!: string | SafeUrl;
+  public avatarImagem!: File[];
+  
   constructor(
+    private domSanitizer: DomSanitizer,
     private router: Router,
     private employeesService: EmployeesService
   ) { }
@@ -29,6 +35,7 @@ export class EditEmployeesComponent implements OnInit {
     if (!this.employee) {
       this.cancel();
     }
+    this.downloadAvatar();
     this.buildForm();
   }
 
@@ -89,12 +96,12 @@ export class EditEmployeesComponent implements OnInit {
       .subscribe(result => {
         if (result) {
           this.updateEmployee(data, result);
+          this.saveFile();
         }
       })
   }
 
   public updateEmployee(data: IEmployee, result: any) {
-
     const payload = {
       id: this.employee?.id,
       nome: data.name,
@@ -149,4 +156,48 @@ export class EditEmployeesComponent implements OnInit {
     return this.form.value;
   }
 
+  public incluirImagem(event: Event) {
+    event.preventDefault();
+    // @ts-ignore
+    document.querySelector('input').click();
+  }
+
+
+  public handleFileInput(avatar: any) {
+    const files = avatar.target.files;
+    this.avatarImagem = files;
+    this.avatarView = this.domSanitizer.bypassSecurityTrustUrl(
+      window.URL.createObjectURL(this.avatarImagem[0])
+    );
+
+  }
+
+  public async saveFile() {
+    if (this.employee && this.employee.id) {
+      if (this.avatarImagem.length) {
+        this.employeesService
+          .addAvatar(this.employee.id, <File>this.avatarImagem[0])
+          .subscribe(result => {
+            console.log(result);
+          })
+      }
+    }
+  }
+  
+  public deletarImagem(event: Event) {
+    event.preventDefault();
+    this.avatarView = '';
+  }
+
+
+  public downloadAvatar() {
+    if(this.employee && this.employee.id) {
+      this.employeesService.donwloadAvatar(this.employee.id)
+      .subscribe((result) => {
+        this.avatarView = this.domSanitizer.bypassSecurityTrustUrl(
+          window.URL.createObjectURL(result)
+        );
+      })
+    }
+  }
 }

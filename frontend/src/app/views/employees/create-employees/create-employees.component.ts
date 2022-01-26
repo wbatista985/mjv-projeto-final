@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { IEmployee } from 'src/app/interfaces/employee.interface';
 import { EmployeesService } from 'src/app/services/employees.service';
@@ -13,9 +14,13 @@ export class CreateEmployeesComponent implements OnInit {
   public form!: FormGroup;
   public phone!: FormArray;
   public address!: FormArray;
+  public avatarView!: string | SafeUrl;
+  public avatarImagem!: File[];
+  public employee!: IEmployee;
 
   constructor(
     private router: Router,
+    private domSanitizer: DomSanitizer,
     private employeesService: EmployeesService
   ) { }
 
@@ -62,11 +67,11 @@ export class CreateEmployeesComponent implements OnInit {
       salarioMedio: parseInt(data.salary)
     }
     this.employeesService.createOccupation(payload)
-    .subscribe(result => {
-      if(result) {
-        this.createEmployee(data, result);
-      }
-    })
+      .subscribe(result => {
+        if (result) {
+          this.createEmployee(data, result);
+        }
+      })
   }
 
   private createEmployee(data: IEmployee, result: any) {
@@ -90,7 +95,8 @@ export class CreateEmployeesComponent implements OnInit {
 
     this.employeesService.createEmployee(payload)
       .subscribe(result => {
-        console.log(result);
+        this.employee = result;
+        this.saveFile();
         this.router.navigateByUrl('employees/list-employees');
       });
   }
@@ -101,6 +107,39 @@ export class CreateEmployeesComponent implements OnInit {
 
   public cancel() {
     this.router.navigateByUrl('employees/list-employees');
+  }
+
+  public incluirImagem(event: Event) {
+    event.preventDefault();
+    // @ts-ignore
+    document.querySelector('input').click();
+  }
+
+
+  public handleFileInput(avatar: any) {
+    const files = avatar.target.files;
+    this.avatarImagem = files;
+    this.avatarView = this.domSanitizer.bypassSecurityTrustUrl(
+      window.URL.createObjectURL(this.avatarImagem[0])
+    );
+
+  }
+
+  public async saveFile() {
+    if (this.employee && this.employee.id) {
+      if (this.avatarImagem.length) {
+        this.employeesService
+          .addAvatar(this.employee.id, <File>this.avatarImagem[0])
+          .subscribe(result => {
+            console.log(result);
+          })
+      }
+    }
+  }
+
+  public deletarImagem(event: Event) {
+    event.preventDefault();
+    this.avatarView = '';
   }
 
 }

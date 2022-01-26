@@ -1,12 +1,25 @@
 <div class="create-employees mat-elevation-z8">
     <form [formGroup]="form" action="" (ngSubmit)="onSubmit();">
         <h1>Cadastro</h1>
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px" [style.padding-bottom]="'10px'">
+            <mat-card class="example-card" fxLayout="column" fxLayoutAlign="center center">
+                <mat-card-title-group>
+                    <img mat-card-md-image [style.width]="'100px'" [src]="avatarView ?avatarView: '../../../../assets/img/default-avatar-profile-icon-vector-18942381.jpeg' " alt="" />
+                </mat-card-title-group>
+                <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+                    <a mat-button href="#" (click)="incluirImagem($event);">Incluir</a>
+                    <a mat-button href="#" (click)="deletarImagem($event);">Deletar</a>
+
+                    <input type="file" style="display:none" (change)="handleFileInput($event)">
+                </mat-card-actions>
+            </mat-card>
+        </div>
         <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
-            <mat-form-field [style.width]="'100%'" appearance="outline">
+            <mat-form-field [style.width]="'50%'" appearance="outline">
                 <mat-label>Nome</mat-label>
                 <input matInput placeholder="Nome" formControlName="name">
             </mat-form-field>
-            <mat-form-field [style.width]="'100%'" appearance="outline">
+            <mat-form-field [style.width]="'50%'" appearance="outline">
                 <mat-label>Email</mat-label>
                 <input matInput placeholder="Email" formControlName="email">
             </mat-form-field>
