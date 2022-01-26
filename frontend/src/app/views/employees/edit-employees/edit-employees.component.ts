@@ -3,10 +3,7 @@ import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '
 import { IEmployee } from 'src/app/interfaces/employee.interface';
 import { IPhone } from 'src/app/interfaces/phone.interface';
 import { IAddress } from 'src/app/interfaces/address.interface';
-import { Employee } from 'src/app/models/employee.model';
-import { Phone } from 'src/app/models/phone.model';
 import { EmployeesService } from 'src/app/services/employees.service';
-import { Address } from 'src/app/models/address.model';
 import { Router } from '@angular/router';
 
 @Component({

@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public dataRoutes = [{
-    label: 'Home',
+    label: 'Inicio',
     icon: 'home',
     route: '/'
   }, {
